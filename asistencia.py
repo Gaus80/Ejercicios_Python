@@ -8,7 +8,9 @@ Manejo de Asistencia en Python
 6) Listar los datos de un curso
 7) Listar los datos de una sesion con el codigo
 8) Listar los datos de un asistencia, codigo de la sesion y codigo del estudiante
-9) Salir
+9) Consultar por fecha y por hora y codigo del curso que estudiantes llegaron tarde
+10)en un curso en un rango de fechas cuantas veces ha llegado tarde, codigo curso rango fechas y codigo del estudiante
+11) Salir
 
 ARREGLOS: Length, append: recibir elementos
 """
@@ -68,7 +70,7 @@ while(opc):
         nombre = input("Ingrese el nombre del estudiante:\n")
         id = input("Ingrese la cedula:\n")
         tipo = input("Ingrese el tipo de documento: Cedula, Tarjeta de Identidad,Pasaporte\n")
-        estudiante = Estudiante(id,tipo,nombre)
+        estudiante = Estudiante(id,tipo,nombre) 
         listaEstudiantes.append(estudiante)
 
     #AÑADIR CURSO
@@ -147,10 +149,30 @@ while(opc):
                 print(f"CODIGO SESION:{asistencia.codigoSesion}, CODIGO DEL ESTUDIANTE: {asistencia.codigoCurso}," 
                      f"ESTADO DE MULTA :{asistencia.estado}, {estadoMulta} \n")
             else:
+                    print("\nSESIÓN NO REGISTRADO\n") 
+
+
+    elif (opcion == "9"):
+        fechaBusqueda = input("Ingrese la fecha de busqueda\n")
+        horaBusqueda = input("Ingrese la hora de busqueda\n")
+        codigoCurso = input("Ingrese el codigo del curso\n")
+        for asistencia in listaAsistencia:
+            if(asistencia.codigoSesion == codigoSesion and asistencia.idEstudiante == codigoEstudiante ):
+                print("DATOS DE  LA ASISTENCIA\n")
+                if(asistencia.estado == "0"):
+                    estadoMulta = "Sin Multa"
+                elif(asistencia.estado == "1"):
+                    estadoMulta = "Llego con Retardo"
+                else:
+                    estadoMulta = "No LLego a Clase"
+
+                print(f"CODIGO SESION:{asistencia.codigoSesion}, CODIGO DEL ESTUDIANTE: {asistencia.codigoCurso}," 
+                     f"ESTADO DE MULTA :{asistencia.estado}, {estadoMulta} \n")
+            else:
                     print("\nSESIÓN NO REGISTRADO\n")      
     
 
-    elif (opcion == "9"):
+    elif (opcion == "11"):
         print("Saliendo del Sistema")
         opc= False
       
